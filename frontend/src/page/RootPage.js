@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom"
 
+import MainNavigation from '../components/MainNavigation'
+
 const RootPage = () => {
     return (
         <>
-            <h1>STRONA GLOWNA</h1>
+            <MainNavigation />
             <main>
                 <Outlet />
             </main>
