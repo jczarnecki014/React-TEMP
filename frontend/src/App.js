@@ -25,7 +25,7 @@ import EventPage,{Loader as eventsLoader} from './page/EventsPage';
 import RootPage from './page/RootPage';
 import EventRootPage from './page/EventRootPage';
 import HomePage from './page/HomePage';
-import EventDetailPage from './page/EventDetailPage';
+import EventDetailPage,{loader as eventDetailLoader} from './page/EventDetailPage';
 import NewEventPage from './page/NewEventPage';
 import EditEventPage from './page/EditEventPage';
 import ErrorPage from './page/ErrorPage';
@@ -48,9 +48,23 @@ function App() {
               element:<EventPage />,
               loader: eventsLoader
             },
-            {path:':someId',element: <EventDetailPage />},
+            {
+              path:':someId',
+              id:'event-detail',
+              loader:eventDetailLoader,
+              children:[
+                {
+                  index:true,
+                  element: <EventDetailPage />,
+                },
+                {
+                  path:'edit',
+                  element: <EditEventPage />
+                }
+
+              ]
+            },
             {path:'new',element: <NewEventPage />},
-            {path:':someId/edit',element: <EditEventPage />},
           ]
         }
       ]
