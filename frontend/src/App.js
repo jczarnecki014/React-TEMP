@@ -28,13 +28,15 @@ import HomePage from './page/HomePage';
 import EventDetailPage from './page/EventDetailPage';
 import NewEventPage from './page/NewEventPage';
 import EditEventPage from './page/EditEventPage';
+import ErrorPage from './page/ErrorPage';
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path:'/',
-      element: <RootPage />, 
+      element: <RootPage />,
+      errorElement:  <ErrorPage />,
       children:[
         {index:true, element: <HomePage />},
         {
