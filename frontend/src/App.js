@@ -23,6 +23,7 @@
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import EventPage from './page/EventsPage';
 import RootPage from './page/RootPage';
+import EventRootPage from './page/EventRootPage';
 import HomePage from './page/HomePage';
 import EventDetailPage from './page/EventDetailPage';
 import NewEventPage from './page/NewEventPage';
@@ -36,10 +37,16 @@ function App() {
       element: <RootPage />, 
       children:[
         {index:true, element: <HomePage />},
-        {path:'events',element: <EventPage />},
-        {path:'events/:someId',element: <EventDetailPage />},
-        {path:'events/new',element: <NewEventPage />},
-        {path:'events/:someId/edit',element: <EditEventPage />},
+        {
+          path:'/events',
+          element:<EventRootPage />,
+          children: [
+            {index:true,element:<EventPage />},
+            {path:':someId',element: <EventDetailPage />},
+            {path:'new',element: <NewEventPage />},
+            {path:':someId/edit',element: <EditEventPage />},
+          ]
+        }
       ]
     },
   ])
