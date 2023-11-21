@@ -25,7 +25,7 @@ import EventPage,{Loader as eventsLoader} from './page/EventsPage';
 import RootPage from './page/RootPage';
 import EventRootPage from './page/EventRootPage';
 import HomePage from './page/HomePage';
-import EventDetailPage,{loader as eventDetailLoader} from './page/EventDetailPage';
+import EventDetailPage,{loader as eventDetailLoader,action as eventDetailsAction} from './page/EventDetailPage';
 import NewEventPage,{action as newEventAction} from './page/NewEventPage';
 import EditEventPage from './page/EditEventPage';
 import ErrorPage from './page/ErrorPage';
@@ -56,6 +56,7 @@ function App() {
                 {
                   index:true,
                   element: <EventDetailPage />,
+                  action: eventDetailsAction
                 },
                 {
                   path:'edit',

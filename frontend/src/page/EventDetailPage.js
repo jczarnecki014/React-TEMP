@@ -23,7 +23,6 @@ export const loader = async ({request,params}) => {
 }
 
 export const action = async ({request,params}) => {
-    
     const response = await fetch('http://localhost:8080/events/'+params.someId,{
         method: request.method,
     })
@@ -31,6 +30,6 @@ export const action = async ({request,params}) => {
     if(!response.ok){
         throw json({message:'Could not fetch details for selected event.'},{status:500})
     }
-    return redirect('/evenets');
-
+    
+    return redirect('/events')
 }
