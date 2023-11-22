@@ -1,4 +1,4 @@
-import { Link, json,useLoaderData } from 'react-router-dom';
+import { Link, json,useLoaderData,useNavigation } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
@@ -15,10 +15,10 @@ const DUMMY_EVENTS = [
 
 function EventsPage() {
   const data = useLoaderData();
-  console.log(data)
+
   return (
     <>
-      {/* <EventsList /> */}
+       <EventsList events={data.events} />
     </>
   );
 }

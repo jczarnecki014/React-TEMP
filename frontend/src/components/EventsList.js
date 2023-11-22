@@ -1,5 +1,6 @@
 import classes from './EventsList.module.css';
 
+
 function EventsList({ events }) {
   return (
     <div className={classes.events}>
