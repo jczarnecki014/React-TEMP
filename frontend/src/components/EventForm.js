@@ -1,4 +1,4 @@
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link,Form, json, redirect } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
@@ -7,9 +7,9 @@ function EventForm({ method, event }) {
   function cancelHandler() {
     navigate('..');
   }
-
+  console.log(method)
   return (
-    <form className={classes.form}>
+    <Form method={method} className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" required defaultValue={event && event.title && event.title} />
@@ -32,8 +32,49 @@ function EventForm({ method, event }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
+}
+
+
+
+export const action = async ({request,parms}) => {
+  console.log('test33')
+
+  const method = request.method;
+  const data = await request.formData();
+  
+  let url = 'http://localhost:8080/events'
+
+  if( method === 'PATCH'){
+    const eventId = parms.eventId
+    url = 'http://localhost:8080/events/' + eventId
+  }
+
+
+  const eventDetails = {
+    title: data.get('title'),
+    image: data.get('image'),
+    date: data.get('date'),
+    description: data.get('description')
+  }
+  const response = await fetch(url,{
+    method: method,
+    body: JSON.stringify(eventDetails),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+
+  if(!response.ok){
+    throw json({message:'Can not fetch data!'},{status:500})
+  }
+
+  return redirect('/events')
+
+
+
 }
 
 export default EventForm;
