@@ -1,26 +1,38 @@
-import  {useLoaderData,json} from 'react-router-dom'
+import { Link, json,useLoaderData } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
+const DUMMY_EVENTS = [
+  {
+    id: 'e1',
+    title: 'Some event',
+  },
+  {
+    id: 'e2',
+    title: 'Another event',
+  },
+];
+
 function EventsPage() {
   const data = useLoaderData();
-  const events = data.events
+  console.log(data)
   return (
     <>
-      <EventsList events={events} />
+      {/* <EventsList /> */}
     </>
   );
 }
 
-export default EventsPage;
+// 1) Zastosowanie LOADERA do fetchowania danych
+export const loader = async () => {
+  const response = await fetch('http://localhost:8080/events');
 
+  if(!response.ok){
+    throw json({message:'Could not fetch the data'},{status:505})
+  }
 
-export const loader = async() => {
-    const response = await fetch('http://localhost:8080/events');
-      if (!response.ok) {
-        // throw new Response(JSON.stringify({message: 'Could not fetch events.'}),{status:500})
-        throw json({message:'Could not fetch events.'},{status:500})
-      } else {
-        return response;
-      }
+  return response;
+
 }
+
+export default EventsPage;
