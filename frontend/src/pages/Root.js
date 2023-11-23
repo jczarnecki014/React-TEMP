@@ -1,17 +1,15 @@
-import { Outlet,useNavigation } from 'react-router-dom';
+import { Outlet, useNavigation } from 'react-router-dom';
 
 import MainNavigation from '../components/MainNavigation';
 
 function RootLayout() {
-  const navigation = useNavigation();
-
-  const isLoding = navigation.state === 'loading';
+  // const navigation = useNavigation();
 
   return (
     <>
       <MainNavigation />
       <main>
-       {isLoding && <p style={{color:'red',textAlign:'center'}}>Is loading...</p>} 
+        {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
         <Outlet />
       </main>
     </>

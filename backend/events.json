@@ -1,1 +1,12 @@
-{"events":[{"title":"asdasas","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-12-01","description":"dada","id":"ae266fbc-2b7c-4f5f-a2e6-fbabfbf34f71"},{"title":"dsadasa","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-11-29","description":"sadadsa","id":"3bc422c1-2a3a-42cc-9412-4a39aed1ede9"},{"title":"asda","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-12-02","description":"sdas","id":"909e0525-0e36-4032-b0f6-72613392ec88"},{"title":"asdasdas","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-11-24","description":"dsadas","id":"161733d3-9c8f-4fd7-983b-d7a1cc61770e"},{"title":"dsada","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-12-02","description":"sadas","id":"7b240f3b-a3b5-41b5-ac43-50902216b586"},{"title":"tdsaas","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-12-01","description":"dasdas","id":"7770b226-f98b-4fbf-8896-e8a3bb11e1fd"},{"title":"test","image":"https://wycinarnia.pl/wp-content/uploads/2017/08/20705959_802366639923019_1763025791_o.jpg","date":"2023-11-28","description":"dasaas","id":"144ab6de-af5a-4dcd-94b0-1c2cfb941d51"},{"title":"test","image":"https://www.argentum-event.pl/wp-content/uploads/2022/04/alicja-w-krainie-czarow013-1024x683.jpg","date":"2023-11-30","description":"sdaas","id":"1968509b-7cf8-41be-ad9e-6391ddf4e26b"},{"title":"test","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJEfc5R5Zj-767gOLaiEYo0oJufi_dI9Ccmw&usqp=CAU","date":"2023-11-29","description":"dadas","id":"189650e0-6de3-4511-837a-9573e6cf7cc9"},{"title":"sad","image":"https://miun.imagevault.media/publishedmedia/co81r635gbhgo2ahfuci/Yran-4start.webp","date":"2023-11-29","description":"asdasas","id":"9ff2ad59-9f4d-423b-b540-0799fe328206"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
+{
+  "events": [
+    {
+      "title": "A new event",
+      "image": "https://cdn.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/va-2016/muenchner-christkindlmarkt/christkindlmarkt-marienplat-logo-hp/document/christkindlmarkt-marienplat-logo-hp.jpg",
+      "date": "2022-10-01",
+      "description": "Some awesome event!",
+      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
+    }
+  ],
+  "users": []
+}
