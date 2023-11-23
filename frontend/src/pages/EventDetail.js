@@ -1,4 +1,4 @@
-import { json, useParams, useRouteLoaderData } from 'react-router-dom';
+import { json, redirect, useParams, useRouteLoaderData } from 'react-router-dom';
 import EvenetItem from '../components/EventItem'
 
 function EventDetailPage() {
@@ -20,6 +20,21 @@ export const loader = async ({request,params}) => {
   }
 
   return response;
+
+}
+
+export const action = async ({request,params}) => {
+  const eventId = params.eventId;
+  const method = request.method;
+
+  const response = await fetch('http://localhost:8080/events/'+eventId,{
+    method,
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  })
+
+  return redirect('/events')
 
 }
 
