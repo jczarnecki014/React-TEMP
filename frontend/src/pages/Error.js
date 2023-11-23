@@ -4,15 +4,19 @@ import { useRouteError } from "react-router-dom";
 const ErrorPage = () => {
     const error = useRouteError();
     
+    console.log(error)
+
     const statusCode = error.status;
-    const message = error.data.message
+    const message = undefined;
+
 
     return (
         <>
         <MainNavigation />
         <main>
             <h1>{statusCode}</h1>
-            <p>{message}</p>
+            <h3>test</h3>
+            {message && <p>{message}</p>}
         </main>
         </>
     )

@@ -7,7 +7,6 @@ function EventForm({ method, event }) {
   function cancelHandler() {
     navigate('..');
   }
-  console.log(method)
   return (
     <Form method={method} className={classes.form}>
       <p>
@@ -38,17 +37,16 @@ function EventForm({ method, event }) {
 
 
 
-export const action = async ({request,parms}) => {
-  console.log('test33')
-
+export const action = async ({request,params}) => {
   const method = request.method;
   const data = await request.formData();
+
   
   let url = 'http://localhost:8080/events'
 
   if( method === 'PATCH'){
-    const eventId = parms.eventId
-    url = 'http://localhost:8080/events/' + eventId
+    const eventId = params.eventId
+    url = 'http://localhost:8080/eventsxxx/' + eventId
   }
 
 
@@ -58,6 +56,8 @@ export const action = async ({request,parms}) => {
     date: data.get('date'),
     description: data.get('description')
   }
+
+
   const response = await fetch(url,{
     method: method,
     body: JSON.stringify(eventDetails),
@@ -65,6 +65,8 @@ export const action = async ({request,parms}) => {
       'Content-Type': 'application/json',
     },
   })
+
+  console.log(response)
 
 
   if(!response.ok){
