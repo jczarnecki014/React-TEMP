@@ -34,11 +34,11 @@ export const action = async ({request,params}) => {
   }
 
   const resData = await response.json()
-  console.log(resData)
+  
+  localStorage.setItem('token', resData.token)
+
 
   return redirect('/')
-
-  console.log(userDetails)
 
 }
 
