@@ -18,6 +18,8 @@ function ErrorPage() {
     message = 'Could not find resource or page.';
   }
 
+  console.log(error)
+
   return (
     <>
       <MainNavigation />
