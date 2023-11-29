@@ -1,8 +1,16 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet,useParams } from 'react-router-dom';
 
 import Header from '../Header.jsx';
+import { useQuery } from '@tanstack/react-query';
 
 export default function EventDetails() {
+
+  const eventId = useParams();
+
+  const {data,isPending,isError,error} = useQuery({
+    queryKey:['events',{eventId:'REPLACE'}]
+  })
+
   return (
     <>
       <Outlet />
