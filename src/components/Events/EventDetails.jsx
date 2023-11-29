@@ -6,16 +6,29 @@ import { useQuery,useMutation } from '@tanstack/react-query';
 
 import { deleteEvent, fetchEvent } from '../../util/http.js';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
+import Modal from '../UI/Modal.jsx'
+import {useState} from 'react'
 
 export default function EventDetails() {
 
   const {id} = useParams();
   const navigate = useNavigate();
+  const [isDeleting,setIsDeleting] = useState(false);
+
+  const StartDeletingHandler = () =>{
+    setIsDeleting(true)
+  }
+  const StopDeletingHandler = () => {
+    setIsDeleting(false)
+  }
 
   const {mutate,isPending:isMutatePending, isError:isMutateError, error:mutateError} = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
-      queryClient.invalidateQueries(['events'])
+      queryClient.invalidateQueries({
+        queryKey: ['events'],
+        refetchType: 'none'
+      }),
       navigate('/events')
     }
   })
@@ -38,11 +51,24 @@ export default function EventDetails() {
 
   const error = mutateError || queryError || undefined
 
-  console.log(isQueryPending)
 
 
   return (
     <>
+      {isDeleting && 
+        <Modal onClose={StopDeletingHandler}>
+          <h2>Are you sure?</h2>
+          <p>Do you really want to delete this event ? This action cannot be undone.</p>
+          <div className="form-actions">
+            <button onClick={StopDeletingHandler} className='button-text'>
+              Cancel
+            </button>
+            <button onClick={onDeleteClickHandler} className='button'>
+              Delete
+            </button>
+          </div>
+        </Modal>
+      }
       <Outlet />
       <Header>
         <Link to="/events" className="nav-item">
@@ -56,7 +82,7 @@ export default function EventDetails() {
           <header>
             <h1>{data.title}</h1>
             <nav>
-              <button onClick={onDeleteClickHandler}>Delete</button>
+              <button onClick={StartDeletingHandler}>Delete</button>
               <Link to="edit">Edit</Link>
             </nav>
           </header>
