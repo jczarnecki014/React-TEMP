@@ -78,6 +78,9 @@ export async function fetchEvent({ id, signal }) {
 
 
 export async function deleteEvent({ id }) {
+
+  console.log('jestem tu')
+
   const response = await fetch(`http://localhost:3000/events/${id}`, {
     method: 'DELETE',
   });
