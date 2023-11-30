@@ -8,7 +8,7 @@ import ErrorBlock from '../UI/ErrorBlock.jsx';
 
 import LoadingIndicator from '../UI/LoadingIndicator.jsx'
 
-import {updateEvent} from '../../util/http.js'
+import {updateEvent,queryClient} from '../../util/http.js'
 
 export default function EditEvent() {
   const navigate = useNavigate();
@@ -19,7 +19,22 @@ export default function EditEvent() {
   });
 
   const {mutate} = useMutation({
-    mutationFn: updateEvent
+    mutationFn: updateEvent,
+    onMutate: async (data) => {
+      const NewEventData = data.event
+      const previousData = queryClient.getQueryData(['events',{eventId:id}])
+      await queryClient.cancelQueries({queryKey:['events',{eventId:id}]})
+      queryClient.setQueryData(['events',{eventId:id}],NewEventData)
+
+      return {previousData}
+    },
+    onError: (error,data,context)=>{
+      queryClient.setQueryData(['events',{eventId:id}], context.previousData)
+    },
+    onSettled: ()=>{
+      queryClient.invalidateQueries(['events',{eventId:id}])
+    }
+
   })
 
   let content;
