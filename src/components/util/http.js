@@ -4,6 +4,7 @@ export const queryClient = new QueryClient();
 
 export async function fetchEvents({ signal, searchTerm, max }) {
   let url = 'http://localhost:3000/events';
+  console.log('test2')
 
   if (searchTerm && max) {
     url += '?search=' + searchTerm + '?max='+max;
@@ -35,10 +36,8 @@ export async function fetchEvents({ signal, searchTerm, max }) {
 
 
 export async function createNewEvent(eventData) {
-
-  
-
-  const response = await fetch(`http://localhost:3000/events`, {
+  console.log(eventData)
+ const response = await fetch(`http://localhost:3000/events`, {
     method: 'POST',
     body: JSON.stringify(eventData),
     headers: {
@@ -59,6 +58,7 @@ export async function createNewEvent(eventData) {
 }
 
 export async function fetchSelectableImages({ signal }) {
+  console.log('test')
   const response = await fetch(`http://localhost:3000/events/images`, { signal });
 
   if (!response.ok) {
