@@ -112,7 +112,6 @@ export async function updateEvent({ id, event }) {
       'Content-Type': 'application/json',
     },
   });
-
   if (!response.ok) {
     const error = new Error('An error occurred while updating the event');
     error.code = response.status;

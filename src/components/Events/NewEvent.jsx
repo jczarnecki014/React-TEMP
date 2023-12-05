@@ -18,6 +18,7 @@ export default function NewEvent() {
       navigate('/events')
     }
   })
+
   function handleSubmit(formData) {
     console.log(formData)
     mutate({event:formData})

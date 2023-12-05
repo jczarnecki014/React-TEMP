@@ -7,6 +7,7 @@ import Header from '../Header.jsx';
 import {fetchEvent} from '../util/http.js'
 
 import LoadingIndicator from '../UI/LoadingIndicator.jsx'
+import ErrorBlock from '../UI/ErrorBlock'
 
 import {deleteEvent} from '../util/http.js'
 import Modal from '../UI/Modal';
@@ -18,12 +19,12 @@ export default function EventDetails() {
   const navigate = useNavigate();
   const [isDeleting,setIsDeleting] = useState(false);
 
-  const {data,isPending,isError,error} = useQuery({
+  const {data,isPending:queryPending,isError,error} = useQuery({
     queryKey: ['events',{id}],
     queryFn: ({signal}) => fetchEvent({signal,id})
   })
 
-  const {mutate} = useMutation({
+  const {mutate,isPending:mutatePending,isError:mutateIsError,error:mutateError} = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -40,17 +41,22 @@ export default function EventDetails() {
   const DeleteFunction = () => {
     mutate({id})
   }
+  const CancelDeleteFunction = () => {
+    setIsDeleting(false)
+  }
 
   return (
     <>
       <Outlet />
       {isDeleting && 
         <Modal>
+          {mutatePending && <LoadingIndicator />}
+          {mutateIsError && <ErrorBlock title='Error druing deleting' message={mutateError.info?.message || 'We cant delete this event, try agaian latter'} />}
           <h1>Are you sure ?</h1>
           <p>Are you sure you wanna delete this event ? </p>
-          <button className='button'>Yes</button>
+          <button className='button' onClick={DeleteFunction}>Yes</button>
           <br />
-          <button>No</button>
+          <button onClick={CancelDeleteFunction}>No</button>
           </Modal>
       }
       <Header>
@@ -59,7 +65,7 @@ export default function EventDetails() {
         </Link>
       </Header>
       <article id="event-details">
-      {isPending && <LoadingIndicator />}
+      {queryPending && <LoadingIndicator />}
         {data && 
           <>
             <header>
