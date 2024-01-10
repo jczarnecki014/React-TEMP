@@ -1,5 +1,6 @@
 import MeetupList from '../components/meetups/MeetupList'
 import { useState,useEffect } from 'react';
+import { MongoClient } from 'mongodb';
 
 const DUMMY_DATA = [
     {
@@ -22,24 +23,29 @@ const HomePage = (props) => {
     return <MeetupList meetups={props.meetups} />
 }
 
-// export async function getServerSideProps(context){
 
-//     const request = context.req
-//     const response = context.res
-
-//     return {
-//         props:{
-//             meetups: DUMMY_DATA
-//         }
-//     }
-// }
 
 export async function getStaticProps(){
-    //fetch data from any api
+    
+    const client = await MongoClient.connect(
+        'mongodb+srv://kubacz00:Lukasz85@cluster0.jn7jyug.mongodb.net/meetups?retryWrites=true&w=majority'
+      );
+      const db = client.db();
+  
+      const meetupsCollection = db.collection('meetups');
+
+      const meetups =  await meetupsCollection.find().toArray();
+
+      client.close();
+
     return {
         props:{
-            meetups: DUMMY_DATA
-        },
+            meetups: meetups.map((meetup)=>{return {
+                title: meetup.title,
+                image: meetup.image,
+                address: meetup.address,
+                id: meetup._id.toString()
+            }})},
         revalidate:10
     }
 }
