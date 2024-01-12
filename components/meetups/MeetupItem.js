@@ -8,6 +8,7 @@ function MeetupItem(props) {
   
   const OnShowDetailsHandler = () => {
     router.push('/'+props.id)
+    
   }
 
   return (
