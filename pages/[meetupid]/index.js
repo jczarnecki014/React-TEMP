@@ -1,4 +1,4 @@
-
+import { MongoClient} from 'mongodb';
 import MeetupDetail from '../../components/meetups/MeetupDetail';
 
 const MeetupDetails = (props) =>{
@@ -19,21 +19,24 @@ const MeetupDetails = (props) =>{
 }
 
 export const getStaticPaths = async () => {
-    return {
-        paths:[
-            {
-                params:{
-                    meetupid: 'm1'
-                }
-            },
-            {
-                params:{
-                    meetupid: 'm2'
-                }
-            },
-        ],
-        fallback: 'blocking'
-    }
+
+    const client = await MongoClient.connect('mongodb+srv://kubacz00:Lukasz85@cluster0.jn7jyug.mongodb.net/meetups?retryWrites=true&w=majority')
+    const db = client.db()
+    const meetupsCollection = db.collection('meetups')
+    const meetupsID = await meetupsCollection.find({}).project({id:1}).toArray()
+
+    client.close()
+
+   return {
+    paths:meetupsID.map((meetupid) => {
+        return {
+            params:{
+                meetupid: meetupid._id.toString()
+            }
+        }
+    }),
+    fallback: false
+   }
 }
 
 export const getStaticProps = async (context) => {
@@ -47,3 +50,6 @@ export const getStaticProps = async (context) => {
 }
 
 export default MeetupDetails
+
+
+
